@@ -16,5 +16,5 @@ class Question {
     val id: Long? = null
 
     @Column(nullable = false, length = 500, comment = "질문내용")
-    val content: String? = null
+    var content: String = ""
 }
