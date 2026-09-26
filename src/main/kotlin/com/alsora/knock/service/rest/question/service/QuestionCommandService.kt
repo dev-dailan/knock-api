@@ -2,15 +2,22 @@ package com.alsora.knock.service.rest.question.service
 
 import com.alsora.knock.domain.question.enitty.Question
 import com.alsora.knock.domain.question.repository.QuestionRepository
+import com.alsora.knock.service.rest.admin.dto.AdminQuestionParams
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
 @Service
-class QuestionQueryService @Autowired constructor(
+class QuestionCommandService
+@Autowired constructor(
     private val questionRepository: QuestionRepository
 ){
-
-    fun fetchQuestionRandomList(size: Int) = questionRepository.findRandom(size)
-
-    fun fetchAdminQuestionList(): List<Question> = questionRepository.findAll()
+    fun addAdminQuestion(
+        param: AdminQuestionParams.Add
+    ): Question{
+        return questionRepository.save(
+            Question().apply {
+                this.content = param.content
+            }
+        )
+    }
 }
