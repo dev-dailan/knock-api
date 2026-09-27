@@ -8,4 +8,6 @@ interface QuestionRepository: JpaRepository<Question, Long> {
 
     @Query(value = "SELECT * FROM question ORDER BY random() LIMIT :size", nativeQuery = true)
     fun findRandom(size: Int): List<Question>
+
+    fun findAllByOrderByIdAsc(): List<Question>
 }

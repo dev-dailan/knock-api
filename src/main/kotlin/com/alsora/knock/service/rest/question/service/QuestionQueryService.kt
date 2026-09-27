@@ -12,5 +12,5 @@ class QuestionQueryService @Autowired constructor(
 
     fun fetchQuestionRandomList(size: Int) = questionRepository.findRandom(size)
 
-    fun fetchAdminQuestionList(): List<Question> = questionRepository.findAll()
+    fun fetchAdminQuestionList(): List<Question> = questionRepository.findAllByOrderByIdAsc()
 }
