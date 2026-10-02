@@ -9,22 +9,19 @@ import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.Table
-import org.hibernate.annotations.JdbcTypeCode
-import org.hibernate.type.SqlTypes
 
 @Entity
-@Table(name = "question")
-class Question {
+@Table(name = "question_category")
+class QuestionCategory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null
 
-    @Column(nullable = false, length = 500, comment = "질문내용")
-    var content: String = ""
+    @Column(name = "question_id", nullable = false, comment = "질문 아이디")
+    var questionId: Long? = null
 
-    @Column(comment = "카테고리")
-    @JdbcTypeCode(SqlTypes.ARRAY)
+    @Column(nullable = false, length = 50, comment = "카테고리")
     @Enumerated(EnumType.STRING)
-    var categories: List<QuestionCategoryType>? = null
+    var category: QuestionCategoryType? = null
 }

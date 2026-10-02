@@ -1,0 +1,12 @@
+aws_region = "ap-northeast-2"
+
+# 예산 초과 알림 메일 (권장)
+alert_email = "you@example.com"
+
+# GitHub Actions 자동 배포를 쓸 때만 입력 (owner/repo)
+# github_repository = "your-org/knock-api"
+
+# DataGrip 등으로 DB 에 직접 접속할 때만 켜고, 끝나면 false 로 되돌려 apply
+# 내 IP 확인: curl -s https://checkip.amazonaws.com
+# db_public_access = true
+# db_allowed_cidrs = ["203.0.113.10/32"]

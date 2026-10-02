@@ -40,7 +40,7 @@ class AdminQuestionController
     @PutMapping("/{id}")
     fun modifyAdminQuestion(
         @PathVariable(value = "id", required = true) id: Long,
-        @RequestBody payload: AdminQuestionParams.Add
+        @RequestBody payload: AdminQuestionParams.Modify
     ): ResponseEntity<Question> {
         val result = questionCommandService.modifyAdminQuestion(id = id, param = payload)
         return ResponseEntity.ok(result)
