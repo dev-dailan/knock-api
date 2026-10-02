@@ -1,6 +1,8 @@
 package com.alsora.knock.service.rest.admin.controller
 
+import com.alsora.knock.component.types.SupportLanguagesType
 import com.alsora.knock.domain.question.enitty.Question
+import com.alsora.knock.domain.question.model.QuestionDTO
 import com.alsora.knock.service.rest.admin.dto.AdminQuestionParams
 import com.alsora.knock.service.rest.question.service.QuestionCommandService
 import com.alsora.knock.service.rest.question.service.QuestionQueryService
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 import java.net.URI
 
@@ -25,8 +28,9 @@ class AdminQuestionController
 
     @GetMapping("")
     fun fetchAdminQuestionList(
-    ): ResponseEntity<List<Question>> {
-        return ResponseEntity.ok( questionQueryService.fetchAdminQuestionList())
+        @RequestParam(required = true) locale: SupportLanguagesType
+    ): ResponseEntity<List<QuestionDTO>> {
+        return ResponseEntity.ok( questionQueryService.fetchAdminQuestionList(locale))
     }
 
     @PostMapping("")

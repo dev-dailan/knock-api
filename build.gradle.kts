@@ -70,6 +70,19 @@ jooq {
                         value = "lower"
                     }
                 }
+                // VARCHAR 컬럼을 Kotlin enum 으로 매핑한다. (enum 이름 그대로 저장/조회)
+                forcedTypes {
+                    forcedType {
+                        userType = "com.alsora.knock.component.types.QuestionCategoryType"
+                        isEnumConverter = true
+                        includeExpression = "question_category\\.category"
+                    }
+                    forcedType {
+                        userType = "com.alsora.knock.component.types.SupportLanguagesType"
+                        isEnumConverter = true
+                        includeExpression = "question_globalization\\.locale"
+                    }
+                }
             }
             target {
                 packageName = "com.alsora.knock.jooq"
