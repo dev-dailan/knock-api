@@ -1,3 +1,5 @@
+--liquibase formatted sql
+
 --changeset knock:0001-create-question logicalFilePath:db/changelog/changes/0001-create-question.sql
 CREATE SEQUENCE IF NOT EXISTS question_id_seq;
 CREATE TABLE IF NOT EXISTS question (
