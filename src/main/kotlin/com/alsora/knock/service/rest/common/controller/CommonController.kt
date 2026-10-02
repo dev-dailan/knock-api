@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController
 class CommonController {
 
     @GetMapping("/support-languages")
-    fun getLanguages(): List<SupportLanguagesType> {
+    fun fetchLanguages(): List<SupportLanguagesType> {
         return SupportLanguagesType.entries
     }
 }
