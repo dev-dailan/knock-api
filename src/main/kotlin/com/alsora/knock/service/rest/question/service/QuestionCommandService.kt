@@ -1,11 +1,15 @@
 package com.alsora.knock.service.rest.question.service
 
+import com.alsora.knock.component.types.SupportLanguagesType
 import com.alsora.knock.domain.question.enitty.Question
 import com.alsora.knock.domain.question.enitty.QuestionCategory
+import com.alsora.knock.domain.question.enitty.QuestionGlobalization
 import com.alsora.knock.domain.question.repository.QuestionCategoryRepository
+import com.alsora.knock.domain.question.repository.QuestionGlobalizationRepository
 import com.alsora.knock.domain.question.repository.QuestionRepository
 import com.alsora.knock.service.rest.admin.dto.AdminQuestionParams
 import jakarta.transaction.Transactional
+import org.apache.coyote.BadRequestException
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
@@ -13,6 +17,7 @@ import org.springframework.stereotype.Service
 class QuestionCommandService
 @Autowired constructor(
     private val questionRepository: QuestionRepository,
+    private val questionGlobalizationRepository: QuestionGlobalizationRepository,
     private val questionCategoryRepository: QuestionCategoryRepository
 ){
     @Transactional
@@ -23,6 +28,14 @@ class QuestionCommandService
             Question().apply {
                 this.content = param.content
                 this.categories = param.categories
+            }
+        )
+
+        questionGlobalizationRepository.save(
+            QuestionGlobalization().apply {
+                this.questionId = question.id
+                this.locale = SupportLanguagesType.KR
+                this.content = param.content
             }
         )
 
@@ -44,7 +57,25 @@ class QuestionCommandService
     ): Question{
         val question = questionRepository.findById(id).orElseThrow()
 
-        param.content?.let { question.content = it}
+        param.content?.let {
+            if (param.locale == null) throw BadRequestException("if you want to update content, locale is not null")
+
+            val globalization = questionGlobalizationRepository.findByQuestionIdAndLocale(id, param.locale)
+            if (globalization == null) {
+                questionGlobalizationRepository.save(
+                    QuestionGlobalization().apply {
+                        this.questionId = question.id
+                        this.locale = param.locale
+                        this.content = it
+                    }
+                )
+            } else {
+                globalization.content = it
+            }
+
+            if (param.locale == SupportLanguagesType.KR) question.content = it
+        }
+
         param.categories?.let { categories ->
             val requested = categories.toSet()
             val stored = questionCategoryRepository.findAllByQuestionId(id)
