@@ -82,6 +82,16 @@ jooq {
                         isEnumConverter = true
                         includeExpression = "question_globalization\\.locale"
                     }
+                    forcedType {
+                        userType = "com.alsora.knock.component.types.SupportLanguagesType"
+                        isEnumConverter = true
+                        includeExpression = "choice_globalization\\.locale"
+                    }
+                    forcedType {
+                        userType = "com.alsora.knock.component.types.LevelType"
+                        isEnumConverter = true
+                        includeExpression = "choice\\.level"
+                    }
                 }
             }
             target {
