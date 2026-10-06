@@ -1,8 +1,13 @@
 package com.alsora.knock.component.types
 
 enum class QuestionCategoryType {
-    LOVE,
-    FRIENDSHIP,
+    CAREER,
     DREAM,
-    CAREER
+    FAVORITE,
+    IF,
+    LOVE,
+    MEMORY,
+    PERSONALITY,
+    RELATIONSHIP,
+    ETC
 }
