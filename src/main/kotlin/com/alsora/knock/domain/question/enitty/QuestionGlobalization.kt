@@ -1,6 +1,6 @@
 package com.alsora.knock.domain.question.enitty
 
-import com.alsora.knock.component.types.SupportLanguagesType
+import com.alsora.knock.component.types.SupportLanguage
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.EnumType
@@ -23,7 +23,7 @@ class QuestionGlobalization {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 10, comment = "언어")
-    var locale: SupportLanguagesType = SupportLanguagesType.KR
+    var locale: SupportLanguage = SupportLanguage.KR
 
     @Column(nullable = false, length = 500, comment = "질문내용")
     var content: String = ""

@@ -1,6 +1,6 @@
 package com.alsora.knock.service.rest.admin.controller
 
-import com.alsora.knock.component.types.SupportLanguagesType
+import com.alsora.knock.component.types.SupportLanguage
 import com.alsora.knock.domain.choice.enity.Choice
 import com.alsora.knock.domain.choice.model.ChoiceDTO
 import com.alsora.knock.service.rest.admin.dto.AdminChoiceParams
@@ -28,7 +28,7 @@ class AdminChoiceController
 
     @GetMapping("")
     fun fetchAdminQuestionList(
-        @RequestParam(required = true) locale: SupportLanguagesType
+        @RequestParam(required = true) locale: SupportLanguage
     ): ResponseEntity<List<ChoiceDTO>> {
         return ResponseEntity.ok(choiceQueryService.fetchAdminChoiceList(locale))
     }

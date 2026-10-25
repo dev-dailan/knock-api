@@ -1,4 +1,4 @@
-c#!/usr/bin/env bash
+#!/usr/bin/env bash
 # 예전 위치(~/playground/knock-api)에서 Terraform 으로 만든 AWS 리소스를 전부 삭제한다.
 #   1) RDS 삭제 보호 해제  2) terraform destroy
 # RDS 는 삭제 직전에 최종 스냅샷(knock-api-final)을 남긴다. 필요 없으면 콘솔 RDS → 스냅샷에서 지운다.

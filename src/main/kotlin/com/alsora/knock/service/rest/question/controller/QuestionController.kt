@@ -1,7 +1,7 @@
 package com.alsora.knock.service.rest.question.controller
 
 import com.alsora.knock.component.types.QuestionCategoryType
-import com.alsora.knock.component.types.SupportLanguagesType
+import com.alsora.knock.component.types.SupportLanguage
 import com.alsora.knock.domain.question.model.RandomQuestionDTO
 import com.alsora.knock.service.rest.question.service.QuestionQueryService
 import org.springframework.beans.factory.annotation.Autowired
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("/questions")
+@RequestMapping("/knock/questions")
 class QuestionController
 @Autowired constructor(
     private val questionQueryService: QuestionQueryService
@@ -20,7 +20,7 @@ class QuestionController
 
     @GetMapping("/random")
     fun fetchQuestionRandomList(
-        @RequestParam(name = "locale", required = false) locale: SupportLanguagesType?,
+        @RequestParam(name = "locale", required = false) locale: SupportLanguage?,
         @RequestParam(name = "size", required = false) size: Int?,
         @RequestParam(name = "category", required = false) category: QuestionCategoryType?
     ): ResponseEntity<List<RandomQuestionDTO>> {

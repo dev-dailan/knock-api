@@ -1,6 +1,6 @@
 package com.alsora.knock.service.rest.question.service
 
-import com.alsora.knock.component.types.SupportLanguagesType
+import com.alsora.knock.component.types.SupportLanguage
 import com.alsora.knock.domain.question.enitty.Question
 import com.alsora.knock.domain.question.enitty.QuestionCategory
 import com.alsora.knock.domain.question.enitty.QuestionGlobalization
@@ -34,7 +34,7 @@ class QuestionCommandService
         questionGlobalizationRepository.save(
             QuestionGlobalization().apply {
                 this.questionId = question.id
-                this.locale = SupportLanguagesType.KR
+                this.locale = SupportLanguage.KR
                 this.content = param.content
             }
         )
@@ -73,7 +73,7 @@ class QuestionCommandService
                 globalization.content = it
             }
 
-            if (param.locale == SupportLanguagesType.KR) question.content = it
+            if (param.locale == SupportLanguage.KR) question.content = it
         }
 
         param.categories?.let { categories ->

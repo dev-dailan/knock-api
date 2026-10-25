@@ -124,7 +124,7 @@ aws sts get-caller-identity
 | application.yml | Terraform 변수 | 현재 값 |
 |---|---|---|
 | `server.port` | `app_port` | `8082` |
-| `server.servlet.context-path` | `app_context_path` | `/knock` |
+| `server.servlet.context-path` | `app_context_path` | `/` (Terraform 은 `""`) |
 
 둘 중 하나를 바꾸면 다른 쪽도 같이 바꿔야 Lambda Web Adapter 가 앱을 찾습니다.
 
@@ -208,7 +208,7 @@ terraform apply
 `yes` 입력. 완료되면 출력값이 나옵니다.
 
 ```
-api_url              = "https://abcd1234.execute-api.ap-northeast-2.amazonaws.com/knock"
+api_url              = "https://abcd1234.execute-api.ap-northeast-2.amazonaws.com"
 artifact_bucket      = "knock-api-artifacts-123456789012"
 lambda_function_name = "knock-api"
 ...
@@ -364,7 +364,7 @@ aws lambda update-alias --function-name knock-api --name live --function-version
 | `terraform apply` 중 Lambda 버전 생성 실패, `deploy.sh` 가 "기동 실패" | 앱이 기동하지 못함. `aws logs tail /aws/lambda/knock-api --since 30m` 로 스택트레이스 확인 (DB 접속, Liquibase, 엔티티-스키마 불일치(`ddl-auto: validate`) 가 흔함) |
 | `curl` 결과 `{"message":"Internal Server Error"}` | Lambda 실행 중 오류 또는 30초 초과. 위 로그 확인 |
 | `{"message":"Too Many Requests"}` | API Gateway 스로틀링. `api_throttle_rate` 조정 |
-| `{"message":"Not Found"}` 가 아닌 Spring 404 | 경로에 context-path `/knock` 가 빠졌는지 확인 |
+| `{"message":"Not Found"}` 가 아닌 Spring 404 | 요청 경로가 컨트롤러 매핑과 맞는지 확인 (context-path 는 `/`) |
 | Lambda 레이어를 찾을 수 없다는 오류 | `lambda_web_adapter_layer_version` 을 [최신 버전](https://github.com/awslabs/aws-lambda-web-adapter#lambda-functions-packaged-as-zip-package-for-aws-managed-runtimes)으로 변경 |
 | DataGrip 접속 타임아웃 | `db_public_access = true` 적용 여부, 현재 IP 가 `db_allowed_cidrs` 와 같은지, 회사망에서 5432 포트가 막혀 있지 않은지 확인 |
 | DataGrip `no pg_hba.conf entry ... no encryption` | SSL 을 켜지 않음 → 6-3 의 3번 |

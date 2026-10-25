@@ -1,7 +1,7 @@
 package com.alsora.knock.service.rest.choice.controller
 
 import com.alsora.knock.component.types.LevelType
-import com.alsora.knock.component.types.SupportLanguagesType
+import com.alsora.knock.component.types.SupportLanguage
 import com.alsora.knock.domain.choice.model.RandomChoiceDTO
 import com.alsora.knock.service.rest.choice.service.ChoiceQueryService
 import org.springframework.beans.factory.annotation.Autowired
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("/choices")
+@RequestMapping("/knock/choices")
 class ChoiceController
 @Autowired constructor(
     private val choiceQueryService: ChoiceQueryService,
@@ -20,7 +20,7 @@ class ChoiceController
 
     @GetMapping("/random")
     fun fetchChoiceRandomList(
-        @RequestParam(name = "locale", required = false) locale: SupportLanguagesType?,
+        @RequestParam(name = "locale", required = false) locale: SupportLanguage?,
         @RequestParam(name = "size", required = false) size: Int?,
         @RequestParam(name = "level", required = false) level: LevelType?
     ): ResponseEntity<List<RandomChoiceDTO>> {
