@@ -1,7 +1,7 @@
 package com.alsora.knock.service.rest.admin.dto
 
 import com.alsora.knock.component.types.LevelType
-import com.alsora.knock.component.types.SupportLanguagesType
+import com.alsora.knock.component.types.SupportLanguage
 import jakarta.validation.constraints.NotBlank
 
 object AdminChoiceParams {
@@ -15,7 +15,7 @@ object AdminChoiceParams {
     )
 
     data class Modify(
-        val locale: SupportLanguagesType?,
+        val locale: SupportLanguage?,
         val level: LevelType?,
         val firstOption: String?,
         val secondOption: String?

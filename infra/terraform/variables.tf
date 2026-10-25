@@ -40,9 +40,9 @@ variable "app_port" {
 }
 
 variable "app_context_path" {
-  description = "application.yml 의 server.servlet.context-path"
+  description = "application.yml 의 server.servlet.context-path (루트(/)면 빈 문자열. 끝에 / 를 붙이지 않는다)"
   type        = string
-  default     = "/knock"
+  default     = ""
 }
 
 # ---------- API Gateway ----------

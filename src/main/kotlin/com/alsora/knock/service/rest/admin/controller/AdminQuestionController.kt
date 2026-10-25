@@ -1,6 +1,6 @@
 package com.alsora.knock.service.rest.admin.controller
 
-import com.alsora.knock.component.types.SupportLanguagesType
+import com.alsora.knock.component.types.SupportLanguage
 import com.alsora.knock.domain.question.enitty.Question
 import com.alsora.knock.domain.question.model.QuestionDTO
 import com.alsora.knock.service.rest.admin.dto.AdminQuestionParams
@@ -28,7 +28,7 @@ class AdminQuestionController
 
     @GetMapping("")
     fun fetchAdminQuestionList(
-        @RequestParam(required = true) locale: SupportLanguagesType
+        @RequestParam(required = true) locale: SupportLanguage
     ): ResponseEntity<List<QuestionDTO>> {
         return ResponseEntity.ok( questionQueryService.fetchAdminQuestionList(locale))
     }

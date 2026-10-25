@@ -1,6 +1,6 @@
 package com.alsora.knock.domain.choice.enity
 
-import com.alsora.knock.component.types.SupportLanguagesType
+import com.alsora.knock.component.types.SupportLanguage
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.EnumType
@@ -23,7 +23,7 @@ class ChoiceGlobalization {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 10, comment = "언어")
-    var locale: SupportLanguagesType = SupportLanguagesType.KR
+    var locale: SupportLanguage = SupportLanguage.KR
 
     @Column(name = "first_option", nullable = false, length = 200, comment = "선택1")
     var firstOption: String = ""

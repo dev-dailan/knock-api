@@ -1,6 +1,6 @@
 package com.alsora.knock.service.rest.choice.service
 
-import com.alsora.knock.component.types.SupportLanguagesType
+import com.alsora.knock.component.types.SupportLanguage
 import com.alsora.knock.domain.choice.enity.Choice
 import com.alsora.knock.domain.choice.enity.ChoiceGlobalization
 import com.alsora.knock.domain.choice.repository.ChoiceGlobalizationRepository
@@ -32,7 +32,7 @@ class ChoiceCommandService
         choiceGlobalizationRepository.save(
             ChoiceGlobalization().apply {
                 this.choiceId = choice.id
-                this.locale = SupportLanguagesType.KR
+                this.locale = SupportLanguage.KR
                 this.firstOption = param.firstOption
                 this.secondOption = param.secondOption
             }
@@ -71,7 +71,7 @@ class ChoiceCommandService
                 param.secondOption?.let { globalization.secondOption = it }
             }
 
-            if (param.locale == SupportLanguagesType.KR) {
+            if (param.locale == SupportLanguage.KR) {
                 param.firstOption?.let { choice.firstOption = it }
                 param.secondOption?.let { choice.secondOption = it }
             }

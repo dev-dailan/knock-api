@@ -1,7 +1,7 @@
 package com.alsora.knock.domain.choice.template
 
 import com.alsora.knock.component.types.LevelType
-import com.alsora.knock.component.types.SupportLanguagesType
+import com.alsora.knock.component.types.SupportLanguage
 import com.alsora.knock.domain.choice.model.ChoiceDTO
 import com.alsora.knock.domain.choice.model.RandomChoiceDTO
 import com.alsora.knock.jooq.tables.Choice
@@ -22,7 +22,7 @@ class ChoiceQueryDSLTemplate
     }
 
     fun findRandomChoiceList(
-        locale: SupportLanguagesType,
+        locale: SupportLanguage,
         limit: Int,
         level: LevelType? = null,
     ): List<RandomChoiceDTO> {
@@ -44,7 +44,7 @@ class ChoiceQueryDSLTemplate
     }
 
     fun findChoiceList(
-        locale: SupportLanguagesType,
+        locale: SupportLanguage,
     ): List<ChoiceDTO> {
         return dslContext.select(
             DB.choice.ID,

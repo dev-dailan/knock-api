@@ -1,7 +1,7 @@
 package com.alsora.knock.service.rest.choice.service
 
 import com.alsora.knock.component.types.LevelType
-import com.alsora.knock.component.types.SupportLanguagesType
+import com.alsora.knock.component.types.SupportLanguage
 import com.alsora.knock.domain.choice.model.ChoiceDTO
 import com.alsora.knock.domain.choice.model.RandomChoiceDTO
 import com.alsora.knock.domain.choice.template.ChoiceQueryDSLTemplate
@@ -14,16 +14,16 @@ class ChoiceQueryService @Autowired constructor(
 ){
 
     fun fetchChoiceRandomList(
-        locale: SupportLanguagesType?,
+        locale: SupportLanguage?,
         size: Int?,
         level: LevelType?
     ): List<RandomChoiceDTO> = choiceQueryDSLTemplate.findRandomChoiceList(
-        locale = locale?: SupportLanguagesType.KR,
+        locale = locale?: SupportLanguage.KR,
         limit = size?: 15,
         level = level
     )
 
     fun fetchAdminChoiceList(
-        locale: SupportLanguagesType
+        locale: SupportLanguage
     ): List<ChoiceDTO> = choiceQueryDSLTemplate.findChoiceList(locale)
 }

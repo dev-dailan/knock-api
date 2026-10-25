@@ -1,7 +1,7 @@
 package com.alsora.knock.service.rest.admin.dto
 
 import com.alsora.knock.component.types.QuestionCategoryType
-import com.alsora.knock.component.types.SupportLanguagesType
+import com.alsora.knock.component.types.SupportLanguage
 import jakarta.validation.constraints.NotBlank
 
 object AdminQuestionParams {
@@ -13,7 +13,7 @@ object AdminQuestionParams {
     )
 
     data class Modify(
-        val locale: SupportLanguagesType?,
+        val locale: SupportLanguage?,
         val content: String?,
         val categories: List<QuestionCategoryType>?
     )

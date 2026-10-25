@@ -78,12 +78,12 @@ jooq {
                         includeExpression = "question_category\\.category"
                     }
                     forcedType {
-                        userType = "com.alsora.knock.component.types.SupportLanguagesType"
+                        userType = "com.alsora.knock.component.types.SupportLanguage"
                         isEnumConverter = true
                         includeExpression = "question_globalization\\.locale"
                     }
                     forcedType {
-                        userType = "com.alsora.knock.component.types.SupportLanguagesType"
+                        userType = "com.alsora.knock.component.types.SupportLanguage"
                         isEnumConverter = true
                         includeExpression = "choice_globalization\\.locale"
                     }

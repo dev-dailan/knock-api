@@ -1,7 +1,7 @@
 package com.alsora.knock.domain.question.template
 
 import com.alsora.knock.component.types.QuestionCategoryType
-import com.alsora.knock.component.types.SupportLanguagesType
+import com.alsora.knock.component.types.SupportLanguage
 import com.alsora.knock.domain.question.model.QuestionDTO
 import com.alsora.knock.domain.question.model.RandomQuestionDTO
 import com.alsora.knock.jooq.tables.Question
@@ -24,7 +24,7 @@ class QuestionQueryDSLTemplate
     }
 
     fun findRandomQuestionList(
-        locale: SupportLanguagesType,
+        locale: SupportLanguage,
         limit: Int,
         category: QuestionCategoryType? = null,
     ): List<RandomQuestionDTO> {
@@ -49,7 +49,7 @@ class QuestionQueryDSLTemplate
     }
 
     fun findQuestionList(
-        locale: SupportLanguagesType
+        locale: SupportLanguage
     ): List<QuestionDTO> {
         return dslContext.select(
             DB.question.ID,
