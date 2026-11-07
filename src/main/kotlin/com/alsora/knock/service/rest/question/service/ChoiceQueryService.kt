@@ -1,4 +1,4 @@
-package com.alsora.knock.service.rest.choice.service
+package com.alsora.knock.service.rest.question.service
 
 import com.alsora.knock.component.types.LevelType
 import com.alsora.knock.component.types.SupportLanguage

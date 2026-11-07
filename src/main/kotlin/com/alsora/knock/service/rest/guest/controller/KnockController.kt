@@ -18,7 +18,7 @@ class KnockController
     private val questionQueryService: QuestionQueryService
 ){
 
-    @GetMapping("questions/random")
+    @GetMapping("/questions/random")
     fun fetchQuestionRandomList(
         @RequestParam(name = "locale", required = false) locale: SupportLanguage?,
         @RequestParam(name = "size", required = false) size: Int?,

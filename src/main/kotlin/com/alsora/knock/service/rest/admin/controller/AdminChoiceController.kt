@@ -4,8 +4,8 @@ import com.alsora.knock.component.types.SupportLanguage
 import com.alsora.knock.domain.choice.enity.Choice
 import com.alsora.knock.domain.choice.model.ChoiceDTO
 import com.alsora.knock.service.rest.admin.dto.AdminChoiceParam
-import com.alsora.knock.service.rest.choice.service.ChoiceCommandService
-import com.alsora.knock.service.rest.choice.service.ChoiceQueryService
+import com.alsora.knock.service.rest.question.service.ChoiceCommandService
+import com.alsora.knock.service.rest.question.service.ChoiceQueryService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
