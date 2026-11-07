@@ -7,7 +7,7 @@ import com.alsora.knock.domain.question.enitty.QuestionGlobalization
 import com.alsora.knock.domain.question.repository.QuestionCategoryRepository
 import com.alsora.knock.domain.question.repository.QuestionGlobalizationRepository
 import com.alsora.knock.domain.question.repository.QuestionRepository
-import com.alsora.knock.service.rest.admin.dto.AdminQuestionParams
+import com.alsora.knock.service.rest.admin.dto.AdminQuestionParam
 import jakarta.transaction.Transactional
 import org.apache.coyote.BadRequestException
 import org.springframework.beans.factory.annotation.Autowired
@@ -22,7 +22,7 @@ class QuestionCommandService
 ){
     @Transactional
     fun addAdminQuestion(
-        param: AdminQuestionParams.Add
+        param: AdminQuestionParam.Add
     ): Question{
         val question = questionRepository.save(
             Question().apply {
@@ -53,7 +53,7 @@ class QuestionCommandService
     @Transactional
     fun modifyAdminQuestion(
         id: Long,
-        param: AdminQuestionParams.Modify
+        param: AdminQuestionParam.Modify
     ): Question{
         val question = questionRepository.findById(id).orElseThrow()
 

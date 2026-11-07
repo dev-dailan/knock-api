@@ -4,7 +4,7 @@ import com.alsora.knock.component.types.QuestionCategoryType
 import com.alsora.knock.component.types.SupportLanguage
 import jakarta.validation.constraints.NotBlank
 
-object AdminQuestionParams {
+object AdminQuestionParam {
 
     data class Add(
         @field:NotBlank

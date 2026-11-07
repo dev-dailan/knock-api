@@ -92,6 +92,21 @@ jooq {
                         isEnumConverter = true
                         includeExpression = "choice\\.level"
                     }
+                    forcedType {
+                        userType = "com.alsora.knock.component.types.AppType"
+                        isEnumConverter = true
+                        includeExpression = "feedback_(question|option|user_answer)\\.app_type"
+                    }
+                    forcedType {
+                        userType = "com.alsora.knock.component.types.SupportLanguage"
+                        isEnumConverter = true
+                        includeExpression = "feedback_globalization\\.locale"
+                    }
+                    forcedType {
+                        userType = "com.alsora.knock.component.types.TableType"
+                        isEnumConverter = true
+                        includeExpression = "feedback_globalization\\.feedback_type"
+                    }
                 }
             }
             target {
