@@ -2,7 +2,7 @@ package com.alsora.knock.service.rest.admin.dto
 
 import com.alsora.knock.component.types.ForbiddenWordCategory
 
-class ForbiddenWordParam {
+object ForbiddenWordParam {
 
     data class Register(
         val word: String,

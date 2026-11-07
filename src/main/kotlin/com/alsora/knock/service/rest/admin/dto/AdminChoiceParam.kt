@@ -4,7 +4,7 @@ import com.alsora.knock.component.types.LevelType
 import com.alsora.knock.component.types.SupportLanguage
 import jakarta.validation.constraints.NotBlank
 
-object AdminChoiceParams {
+object AdminChoiceParam {
 
     data class Add(
         val level: LevelType,

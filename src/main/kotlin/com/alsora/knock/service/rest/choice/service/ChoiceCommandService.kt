@@ -5,7 +5,7 @@ import com.alsora.knock.domain.choice.enity.Choice
 import com.alsora.knock.domain.choice.enity.ChoiceGlobalization
 import com.alsora.knock.domain.choice.repository.ChoiceGlobalizationRepository
 import com.alsora.knock.domain.choice.repository.ChoiceRepository
-import com.alsora.knock.service.rest.admin.dto.AdminChoiceParams
+import com.alsora.knock.service.rest.admin.dto.AdminChoiceParam
 import jakarta.transaction.Transactional
 import org.apache.coyote.BadRequestException
 import org.springframework.beans.factory.annotation.Autowired
@@ -19,7 +19,7 @@ class ChoiceCommandService
 ){
     @Transactional
     fun addAdminChoice(
-        param: AdminChoiceParams.Add
+        param: AdminChoiceParam.Add
     ): Choice {
         val choice = choiceRepository.save(
             Choice().apply {
@@ -43,7 +43,7 @@ class ChoiceCommandService
     @Transactional
     fun modifyAdminChoice(
         id: Long,
-        param: AdminChoiceParams.Modify
+        param: AdminChoiceParam.Modify
     ): Choice {
         val choice = choiceRepository.findById(id).orElseThrow()
 

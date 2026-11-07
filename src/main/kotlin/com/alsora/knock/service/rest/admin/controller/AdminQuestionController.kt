@@ -3,7 +3,7 @@ package com.alsora.knock.service.rest.admin.controller
 import com.alsora.knock.component.types.SupportLanguage
 import com.alsora.knock.domain.question.enitty.Question
 import com.alsora.knock.domain.question.model.QuestionDTO
-import com.alsora.knock.service.rest.admin.dto.AdminQuestionParams
+import com.alsora.knock.service.rest.admin.dto.AdminQuestionParam
 import com.alsora.knock.service.rest.question.service.QuestionCommandService
 import com.alsora.knock.service.rest.question.service.QuestionQueryService
 import org.springframework.beans.factory.annotation.Autowired
@@ -30,12 +30,13 @@ class AdminQuestionController
     fun fetchAdminQuestionList(
         @RequestParam(required = true) locale: SupportLanguage
     ): ResponseEntity<List<QuestionDTO>> {
-        return ResponseEntity.ok( questionQueryService.fetchAdminQuestionList(locale))
+        val result = questionQueryService.fetchAdminQuestionList(locale)
+        return ResponseEntity.ok(result)
     }
 
     @PostMapping("")
     fun addAdminQuestion(
-        @RequestBody payload: AdminQuestionParams.Add
+        @RequestBody payload: AdminQuestionParam.Add
     ): ResponseEntity<Question> {
         val result = questionCommandService.addAdminQuestion(param = payload)
         return ResponseEntity.created(URI("")).body(result)
@@ -44,7 +45,7 @@ class AdminQuestionController
     @PutMapping("/{id}")
     fun modifyAdminQuestion(
         @PathVariable(value = "id", required = true) id: Long,
-        @RequestBody payload: AdminQuestionParams.Modify
+        @RequestBody payload: AdminQuestionParam.Modify
     ): ResponseEntity<Question> {
         val result = questionCommandService.modifyAdminQuestion(id = id, param = payload)
         return ResponseEntity.ok(result)

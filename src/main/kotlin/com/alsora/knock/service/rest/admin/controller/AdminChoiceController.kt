@@ -3,7 +3,7 @@ package com.alsora.knock.service.rest.admin.controller
 import com.alsora.knock.component.types.SupportLanguage
 import com.alsora.knock.domain.choice.enity.Choice
 import com.alsora.knock.domain.choice.model.ChoiceDTO
-import com.alsora.knock.service.rest.admin.dto.AdminChoiceParams
+import com.alsora.knock.service.rest.admin.dto.AdminChoiceParam
 import com.alsora.knock.service.rest.choice.service.ChoiceCommandService
 import com.alsora.knock.service.rest.choice.service.ChoiceQueryService
 import org.springframework.beans.factory.annotation.Autowired
@@ -35,7 +35,7 @@ class AdminChoiceController
 
     @PostMapping("")
     fun addAdminChoice(
-        @RequestBody payload: AdminChoiceParams.Add
+        @RequestBody payload: AdminChoiceParam.Add
     ): ResponseEntity<Choice> {
         val result = choiceCommandService.addAdminChoice(param = payload)
         return ResponseEntity.created(URI("")).body(result)
@@ -44,7 +44,7 @@ class AdminChoiceController
     @PutMapping("/{id}")
     fun modifyAdminChoice(
         @PathVariable(value = "id", required = true) id: Long,
-        @RequestBody payload: AdminChoiceParams.Modify
+        @RequestBody payload: AdminChoiceParam.Modify
     ): ResponseEntity<Choice> {
         val result = choiceCommandService.modifyAdminChoice(id = id, param = payload)
         return ResponseEntity.ok(result)
