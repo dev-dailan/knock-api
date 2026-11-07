@@ -50,10 +50,11 @@ class FeedbackQueryDSLTemplate
         return dslContext.select(
             DB.question.APP_TYPE.`as`("appType"),
             DB.question.ID.`as`("questionId"),
-            // 해당 언어 번역이 없으면 기본 언어(KR) 내용을 보여 준다.
-            DSL.coalesce(questionGlobalization.CONTENT, DB.question.QUESTION).`as`("question"),
+            DB.question.QUESTION.`as`("defaultQuestion"),
+            questionGlobalization.CONTENT.`as`("question"),
             DB.option.ID.`as`("optionId"),
-            DSL.coalesce(optionGlobalization.CONTENT, DB.option.OPTION).`as`("option"),
+            DB.option.OPTION.`as`("defaultOption"),
+            optionGlobalization.CONTENT.`as`("option"),
             DB.option.IS_ACTIVATED.`as`("isActivated")
         ).from(DB.question)
             .leftJoin(DB.option)
@@ -75,9 +76,8 @@ class FeedbackQueryDSLTemplate
             .and(DB.question.ID.eq(questionId))
             .and(DB.question.APP_TYPE.eq(app))
 
-        // question, option 컬럼에는 기본 언어(KR) 내용이 저장되어 있으므로 다국어 테이블을 조인하지 않는다.
+        // option 컬럼에는 기본 언어(KR) 내용이 저장되어 있으므로 다국어 테이블을 조인하지 않는다.
         val optionStatistics = dslContext.select(
-            DB.question.QUESTION.`as`("question"),
             DB.option.ID.`as`("option_id"),
             DB.option.OPTION.`as`("option"),
             DSL.count(DB.answer.ID).`as`("count")
@@ -89,11 +89,10 @@ class FeedbackQueryDSLTemplate
             .leftJoin(DB.answer)
             .on(DB.answer.OPTION_ID.eq(DB.option.ID).and(DB.answer.APP_TYPE.eq(app)))
             .where(questionConditions)
-            .groupBy(DB.question.QUESTION, DB.option.ID, DB.option.OPTION)
+            .groupBy(DB.option.ID, DB.option.OPTION)
 
         // 기타 응답은 option_id 가 NULL 이라 선택지와 조인되지 않으므로 따로 집계한다.
         val etcStatistics = dslContext.select(
-            DB.question.QUESTION.`as`("question"),
             DSL.castNull(SQLDataType.BIGINT).`as`("option_id"),
             DSL.inline(ETC_OPTION).`as`("option"),
             DSL.count(DB.answer.ID).`as`("count")
@@ -103,12 +102,11 @@ class FeedbackQueryDSLTemplate
                 .and(DB.answer.APP_TYPE.eq(app))
                 .and(DB.answer.OPTION_ID.isNull))
             .where(questionConditions)
-            .groupBy(DB.question.QUESTION)
+            .groupBy(DB.question.ID)
 
         val statistics = optionStatistics.unionAll(etcStatistics).asTable("statistics")
 
         return dslContext.select(
-            statistics.field("question"),
             statistics.field("option"),
             statistics.field("count")
         ).from(statistics)

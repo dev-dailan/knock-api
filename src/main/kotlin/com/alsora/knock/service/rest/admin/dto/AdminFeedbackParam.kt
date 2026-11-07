@@ -6,7 +6,7 @@ import com.alsora.knock.component.types.SupportLanguage
 object AdminFeedbackParam {
 
     data class RegisterQuestion(
-        val appType: AppType,
+        val app: AppType,
         val question: String
     )
 
@@ -16,7 +16,7 @@ object AdminFeedbackParam {
     )
 
     data class RegisterOption(
-        val appType: AppType,
+        val app: AppType,
         val questionId: Long,
         val option: String
     )

@@ -6,12 +6,14 @@ object AdminFeedbackResult {
 
     data class Question(
         val questionId: Long,
+        val defaultQuestion: String,
         val question: String?,
         val options: List<Option>
     )
 
     data class Option(
         val optionId: Long,
+        val defaultOption: String?,
         val option: String?,
         val isActivated: Boolean
     )
