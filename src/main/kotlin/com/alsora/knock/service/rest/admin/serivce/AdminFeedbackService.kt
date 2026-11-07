@@ -40,12 +40,14 @@ class AdminFeedbackService
         return feedback.groupBy { it.questionId }.map { (questionId, rows) ->
             AdminFeedbackResult.Question(
                 questionId = questionId,
+                defaultQuestion = rows.first().defaultQuestion,
                 question = rows.first().question,
                 options = rows
                     .filter { it.optionId != null }
                     .map {
                         AdminFeedbackResult.Option(
                             optionId = it.optionId!!,
+                            defaultOption = it.defaultOption,
                             option = it.option,
                             isActivated = it.isActivated == true
                         )
@@ -54,7 +56,7 @@ class AdminFeedbackService
         }
     }
 
-    fun getFeedbackQuestion(
+    fun getFeedbackQuestionList(
         app: AppType
     ): List<FeedbackQuestion> {
         return feedbackQuestionRepository.findAllByAppTypeAndIsDeletedIsFalseOrderByIdDesc(app)
@@ -67,7 +69,7 @@ class AdminFeedbackService
 
         val feedbackQuestion = feedbackQuestionRepository.save(
             FeedbackQuestion().apply {
-                this.appType = param.appType
+                this.appType = param.app
                 this.question = param.question
             }
         )
@@ -127,6 +129,19 @@ class AdminFeedbackService
             globalization.forEach { it.isDeleted = true }
         }
 
+        // 질문을 삭제하면 하위 선택지와 선택지 다국어 데이터도 함께 삭제한다.
+        val feedbackOptions = feedbackOptionRepository.findAllByFeedbackQuestionId(id)
+        feedbackOptions.forEach {
+            it.isActivated = false
+            it.isDeleted = true
+        }
+
+        val optionGlobalization = feedbackOptionGlobalizationRepository.findByFeedbackTypeAndFeedbackIdIn(
+            TableType.FEEDBACK_OPTION,
+            feedbackOptions.mapNotNull { it.id }
+        )
+        optionGlobalization.forEach { it.isDeleted = true }
+
         feedbackQuestion.isDeleted = true
     }
 
@@ -138,13 +153,13 @@ class AdminFeedbackService
             .filter { it.isDeleted != true }
             .orElseThrow { NotFoundException(ExceptionType.NotFound.NOT_FOUND_FEEDBACK_QUESTION) }
 
-        if (feedbackQuestion.appType != param.appType) {
+        if (feedbackQuestion.appType != param.app) {
             throw BadRequestException(ExceptionType.BadRequest.FEEDBACK_APP_TYPE_MISMATCH)
         }
 
         val feedbackOption = feedbackOptionRepository.save(
             FeedbackOption().apply {
-                this.appType = param.appType
+                this.appType = param.app
                 this.feedbackQuestionId = param.questionId
                 this.option = param.option
             }

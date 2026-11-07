@@ -42,8 +42,8 @@ class CommonController
         return feedbackService.getFeedback(locale, app, questionId)
     }
 
-    @PostMapping("/feedbacks")
-    fun registerFeedback(
+    @PostMapping("/feedbacks/answer")
+    fun registerFeedbackUserAnswer(
         @RequestBody payload: FeedbackParam.RegisterAnswer
     ): ResponseEntity<FeedbackUserAnswer> {
         val result = feedbackService.registerFeedbackUserAnswer(payload)

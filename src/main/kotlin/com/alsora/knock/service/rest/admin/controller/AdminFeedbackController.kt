@@ -38,10 +38,10 @@ class AdminFeedbackController
     }
 
     @GetMapping("/questions")
-    fun getFeedbackQuestion(
+    fun getFeedbackQuestionList(
         @RequestParam(name = "app", required = true) app: AppType
     ): ResponseEntity<List<FeedbackQuestion>> {
-        val result = feedbackService.getFeedbackQuestion(app)
+        val result = feedbackService.getFeedbackQuestionList(app)
         return ResponseEntity.ok(result)
     }
 
